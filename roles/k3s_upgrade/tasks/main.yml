@@ -39,7 +39,7 @@
     - name: Save the existing K3s token if needed
       when:
         - token is not defined
-        - inventory_hostname == groups[server_group][0] or ansible_host == groups[server_group][0]
+        - server_group in group_names
       ansible.builtin.command: cut -d':' -f4 /var/lib/rancher/k3s/server/node-token
       register: k3s_upgrade_old_token
       changed_when: false
